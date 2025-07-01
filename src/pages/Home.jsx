@@ -48,7 +48,6 @@ const Home = () => {
        duration:2,
        scrollTrigger:{
          trigger:".page2",
-         end:"top 30%",
          scroller:"body",
            scrub:true
        }
