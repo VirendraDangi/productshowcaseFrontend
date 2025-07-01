@@ -6,8 +6,67 @@ import { FiInstagram } from "react-icons/fi";
 import { FaFacebook } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { BsYoutube } from "react-icons/bs";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+
+ gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
+
+  const tl = gsap.timeline();
+  const tl2 = gsap.timeline();
+  
+   useGSAP(()=>{
+     tl.from(".imgText1",{
+       y:30,
+       opacity:0,
+       delay:0.4,
+       duration:1,
+     }) 
+      tl.from(".imgText2",{
+       y:30,
+       opacity:0,
+       duration:1,
+     }) 
+   tl2.from(".page2txt1",{
+       x:500,
+       opacity:0,
+       delay:1,
+       duration:2,
+       scrollTrigger:{
+         trigger:".page2",
+         scroller:"body",
+           scrub:0.6
+       }
+     }) 
+       tl2.from(".page2txt2",{
+       x:-500,
+       opacity:0,
+       delay:1,
+       duration:2,
+       scrollTrigger:{
+         trigger:".page2",
+         scroller:"body",
+         markers:true,
+           scrub:true
+       }
+     })
+        tl2.from(".page2txt3",{
+       y:300,
+       opacity:0,
+       delay:1,
+       duration:2,
+       scrollTrigger:{
+         trigger:".page2",
+         scroller:"body",
+         markers:true,
+           scrub:true
+       }
+     })  
+   })
+
   const navigate = useNavigate();
   const navi = () => {
     navigate("/products");
@@ -15,14 +74,14 @@ const Home = () => {
 
   return (
     <div className="">
-      <div className="h-screen m-5 md:m-0 md:overflow-hidden  rounded-4xl bg-[url('/10001.webp')] bg-cover bg-center flex items-center justify-center text-white text-4xl font-bold relative ">
+      <div className="h-screen m-5 md:m-0 md:overflow-x-hidden  rounded-4xl bg-[url('/10001.webp')] bg-cover bg-center flex items-center justify-center text-white text-4xl font-bold relative ">
         <div className="bg-opacity-60 flex flex-col items-center justify-center text-center px-4 absolute bottom-10">
-          <p className="text-gray-300  text-lg md:text-xl max-w-2xl mb-6 drop-shadow-md">
+          <p className="text-gray-300  text-lg md:text-xl max-w-2xl mb-6 drop-shadow-md imgText1 ">
             Your one-stop destination for premium lifestyle essentials. Explore
             our handpicked collections crafted to add value and style to your
             life.
           </p>
-          <h1 className="text-gray-400 text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">
+          <h1 className="text-gray-400 text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg imgText2">
             Discover Quality Products
           </h1>
 
@@ -32,15 +91,15 @@ const Home = () => {
         </div>
       </div>
 
-      <div className=" inset-0 mt-50 bg-opacity-60 flex flex-col items-center justify-center text-center px-4">
-        <h1 className="text-gray-700 text-4xl md:text-6xl font-extrabold mb-4">
+      <div className=" inset-0 mt-50 bg-opacity-60 flex flex-col items-center justify-center text-center  px-4 page2 ">
+        <h1 className="text-gray-700 text-4xl md:text-6xl font-extrabold mb-4 page2txt1 " >
           Elevate Your Everyday
         </h1>
-        <p className="text-gray-600 text-lg md:text-xl max-w-3xl mb-6">
+        <p className="text-gray-600 text-lg md:text-xl max-w-3xl mb-6 page2txt2">
           Discover handpicked products that blend quality, innovation, and
           design — made to fit your lifestyle and built to impress.
         </p>
-        <p className="text-gray-500 text-base md:text-lg max-w-2xl italic">
+        <p className="text-gray-500 text-base md:text-lg max-w-2xl italic page2txt3">
           From tech to fashion, everything we showcase is curated with purpose
           and style in mind.
         </p>

@@ -2,8 +2,30 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
+import { gsap } from "gsap";
+ import { useGSAP } from '@gsap/react';
 
 const Nav = () => {
+
+   const tl = gsap.timeline() ;
+ 
+   useGSAP(()=>{
+     tl.from(".logo",{
+       y:-50,
+       opacity :0 ,
+       duration:0.9,
+       delay : 0.2,
+
+      
+     })
+     tl.from(".nav",{
+       y:-50,
+       opacity :0 ,
+       duration:0.6,
+       stagger :0.3
+     })
+   })
+
   const user = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -24,25 +46,25 @@ const Nav = () => {
       
         <div
           onClick={navigter}
-          className="text-xl  font-bold text-indigo-600 cursor-pointer"
+          className="text-xl logo  font-bold text-indigo-600 cursor-pointer"
         >
           ShopEase
         </div>
 
-        <nav className="hidden justify-center w-full md:flex space-x-10 font-medium">
-          <NavLink to="/" className={linkClass}>
+        <nav className=" nav hidden justify-center w-full md:flex space-x-10 font-medium">
+          <NavLink to="/" className={`nav ${linkClass}`}>
             Home
           </NavLink>
-          <NavLink to="/Products" className={linkClass}>
+          <NavLink to="/Products" className={`nav ${linkClass}`}>
             Products
           </NavLink>
-          <NavLink to="/Card" className={linkClass}>
+          <NavLink to="/Card" className={`nav ${linkClass}`}>
             Cart
           </NavLink>
-          <NavLink to="/Login" className={linkClass}>
+          <NavLink to="/Login" className={`nav ${linkClass}`}>
             Login
           </NavLink>
-          <NavLink to="/CreateProduct" className={linkClass}>
+          <NavLink to="/CreateProduct" className={`nav ${linkClass}`}>
             Create Product
           </NavLink>
         </nav>
@@ -95,3 +117,4 @@ const Nav = () => {
 };
 
 export default Nav;
+
